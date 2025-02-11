@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Journalogiste - Podcast</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1f2937;
+            --background-color: #f8fafc;
+            --card-background: #ffffff;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --spacing-unit: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 2);
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-unit);
+            padding: calc(var(--spacing-unit) * 4) 0;
+            text-align: center;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--secondary-color);
+            margin-bottom: calc(var(--spacing-unit) / 2);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--spacing-unit);
+            margin: calc(var(--spacing-unit) * 2) 0;
+        }
+
+        .social-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .social-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .episode {
+            background-color: var(--card-background);
+            border-radius: 16px;
+            padding: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .episode:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .episode h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) / 2);
+        }
+
+        .episode .meta {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-unit);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .episode p {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-unit);
+        }
+
+        audio {
+            width: 100%;
+            margin: var(--spacing-unit) 0;
+            border-radius: 8px;
+        }
+
+        audio::-webkit-media-controls {
+            border-radius: 8px;
+        }
+
+        .spotify-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #1DB954;
+            color: white;
+            text-decoration: none;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .spotify-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 185, 84, 0.2);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-unit);
+            margin-top: calc(var(--spacing-unit) * 3);
+            align-items: center;
+        }
+
+        .pagination button {
+            padding: 0.75rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .pagination button:disabled {
+            background-color: var(--text-secondary);
+            cursor: not-allowed;
+        }
+
+        .pagination .page-info {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin: 0 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--spacing-unit);
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .episode {
+                padding: var(--spacing-unit);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logo couleur.jpeg" alt="Le Journalogiste Logo" class="logo">
+            <h1>Le Journalogiste</h1>
+            <p>Explorez les biais dans les médias grand public et le journalisme à travers des analyses approfondies et des discussions enrichissantes</p>
+            <div class="social-links">
+                <a href="https://twitter.com/yourhandle" target="_blank" class="social-button">
+                    Suivre sur X
+                </a>
+            </div>
+        </header>
+
+        <section class="episodes">
+            <div class="episode">
+                <h2>Épisode 5 - L'Intelligence Artificielle dans les Médias</h2>
+                <div class="meta">
+                    <span>15 février 2025</span>
+                    <span>48 minutes</span>
+                </div>
+                <p>Analyse approfondie de la couverture médiatique de l'IA et des mythes couramment véhiculés.</p>
+                <audio controls>
+                    <source src="episode5.mp3" type="audio/mpeg">
+                    Votre navigateur ne supporte pas l'audio.
+                </audio>
+                <a class="spotify-button" href="https://open.spotify.com/episode/5" target="_blank">
+                    Écouter sur Spotify
+                </a>
+            </div>
+
+            <div class="episode">
+                <h2>Épisode 4 - Fact-checking et Vérification des Sources</h2>
+                <div class="meta">
+                    <span>8 février 2025</span>
+                    <span>52 minutes</span>
+                </div>
+                <p>Guide pratique pour vérifier l'information et identifier les sources fiables.</p>
+                <audio controls>
+                    <source src="episode4.mp3" type="audio/mpeg">
+                    Votre navigateur ne supporte pas l'audio.
+                </audio>
+                <a class="spotify-button" href="https://open.spotify.com/episode/4" target="_blank">
+                    Écouter sur Spotify
+                </a>
+            </div>
+
+            <div class="episode">
+                <h2>Épisode 3 - Les Réseaux Sociaux et l'Information</h2>
+                <div class="meta">
+                    <span>1 février 2025</span>
+                    <span>45 minutes</span>
+                </div>
+                <p>Impact des réseaux sociaux sur la diffusion de l'information et les chambres d'écho.</p>
+                <audio controls>
+                    <source src="episode3.mp3" type="audio/mpeg">
+                    Votre navigateur ne supporte pas l'audio.
+                </audio>
+                <a class="spotify-button" href="https://open.spotify.com/episode/3" target="_blank">
+                    Écouter sur Spotify
+                </a>
+            </div>
+
+            <div class="episode">
+                <h2>Épisode 2 - Biais de Confirmation</h2>
+                <div class="meta">
+                    <span>23 janvier 2025</span>
+                    <span>50 minutes</span>
+                </div>
+                <p>Exploration du biais de confirmation et son influence sur notre consommation d'information.</p>
+                <audio controls>
+                    <source src="episode2.mp3" type="audio/mpeg">
+                    Votre navigateur ne supporte pas l'audio.
+                </audio>
+                <a class="spotify-button" href="https://open.spotify.com/episode/2" target="_blank">
+                    Écouter sur Spotify
+                </a>
+            </div>
+
+            <div class="episode">
+                <h2>Épisode 1 - Introduction aux Biais Médiatiques</h2>
+                <div class="meta">
+                    <span>15 janvier 2025</span>
+                    <span>45 minutes</span>
+                </div>
+                <p>Une plongée dans les différents types de biais qui influencent la couverture médiatique.</p>
+                <audio controls>
+                    <source src="episode1.mp3" type="audio/mpeg">
+                    Votre navigateur ne supporte pas l'audio.
+                </audio>
+                <a class="spotify-button" href="https://open.spotify.com/episode/1" target="_blank">
+                    Écouter sur Spotify
+                </a>
+            </div>
+        </section>
+
+        <div class="pagination">
+            <button id="prevButton" onclick="changePage(-1)">Précédent</button>
+            <span class="page-info">Page <span id="currentPageNumber">1</span> sur <span id="totalPages">1</span></span>
+            <button id="nextButton" onclick="changePage(1)">Suivant</button>
+        </div>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const episodesPerPage = 3;
+        
+        function updatePagination() {
+            const episodes = document.querySelectorAll('.episode');
+            const totalPages = Math.ceil(episodes.length / episodesPerPage);
+            
+            document.getElementById('currentPageNumber').textContent = currentPage;
+            document.getElementById('totalPages').textContent = totalPages;
+            
+            document.getElementById('prevButton').disabled = currentPage === 1;
+            document.getElementById('nextButton').disabled = currentPage === totalPages;
+            
+            episodes.forEach((episode, index) => {
+                if (index >= (currentPage - 1) * episodesPerPage && index < currentPage * episodesPerPage) {
+                    episode.style.display = 'block';
+                } else {
+                    episode.style.display = 'none';
+                }
+            });
+        }
+        
+        function changePage(delta) {
+            const episodes = document.querySelectorAll('.episode');
+            const totalPages = Math.ceil(episodes.length / episodesPerPage);
+            const newPage = currentPage + delta;
+            
+            if (newPage >= 1 && newPage <= totalPages) {
+                currentPage = newPage;
+                updatePagination();
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            updatePagination();
+        });
+    </script>
+</body>
+</html>
